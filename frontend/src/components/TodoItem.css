@@ -1,0 +1,248 @@
+/**
+ * TodoItem 组件样式
+ */
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+  position: relative;
+  background: var(--bg-white);
+}
+
+.todo-item:hover {
+  background: var(--bg-light);
+  transform: translateX(4px);
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item.completed {
+  opacity: 0.7;
+  background: #f8fffe;
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+.todo-item.completed .todo-description {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+.todo-item.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* 内容区域 */
+.todo-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.display-content {
+  width: 100%;
+}
+
+.todo-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.todo-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.todo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.todo-date {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* 编辑表单 */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.edit-title {
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--primary-color);
+}
+
+.edit-description {
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 60px;
+  border: 1px solid var(--border-color);
+}
+
+.edit-description:focus {
+  border-color: var(--primary-color);
+}
+
+/* 操作按钮 */
+.todo-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.display-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.todo-item:hover .display-actions {
+  opacity: 1;
+}
+
+.edit-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.todo-actions .btn {
+  font-size: 0.8rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  min-width: auto;
+  white-space: nowrap;
+}
+
+/* 加载状态 */
+.item-loading {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-md);
+  transform: translateY(-50%);
+}
+
+.item-loading .spinner {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+/* 复选框自定义样式 */
+.todo-item .custom-checkbox {
+  margin-top: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.todo-item .custom-checkbox .checkmark {
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+}
+
+.todo-item .custom-checkbox:hover .checkmark {
+  transform: scale(1.1);
+  border-color: var(--success-color);
+}
+
+.todo-item .custom-checkbox input:checked ~ .checkmark {
+  background: var(--success-color);
+  border-color: var(--success-color);
+  transform: scale(1.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .todo-item {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+  
+  .todo-content {
+    gap: var(--spacing-sm);
+  }
+  
+  .todo-title {
+    font-size: 1rem;
+  }
+  
+  .todo-description {
+    font-size: 0.85rem;
+  }
+  
+  .todo-actions {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .display-actions,
+  .edit-actions {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .todo-actions .btn {
+    font-size: 0.75rem;
+    padding: var(--spacing-xs);
+  }
+  
+  .todo-meta {
+    gap: 2px;
+  }
+  
+  .todo-date {
+    font-size: 0.7rem;
+  }
+}
+
+/* 动画效果 */
+.todo-item {
+  animation: slideUp 0.3s ease-out;
+}
+
+.todo-item.completed .todo-title,
+.todo-item.completed .todo-description {
+  transition: all var(--transition-normal);
+}
+
+/* 拖拽时的样式 */
+.todo-item.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+  z-index: 1000;
+}
+
+/* 聚焦状态 */
+.todo-item:focus-within {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
